@@ -15,7 +15,6 @@ import static com.lessons.home.database.Utils.getString;
 public class Database {
 
     private static final List<Map<String, Object>> storeCash = new ArrayList<Map<String, Object>>();
-    private static final Tables TYPES = new Tables();
 
     public static void main(String[] args) {
         String INSERT = "INSERT VALUES ‘lastName’ = ‘Федоров’ , ‘id’=3, ‘age’=40, ‘active’=true";
@@ -65,8 +64,8 @@ public class Database {
 
             String key = getString(rawKey);
 
-            if (TYPES.USER.containsKey(key)) {
-                Type type = TYPES.USER.get(key);
+            if (Tables.USER.containsKey(key)) {
+                Type<?> type = Tables.USER.get(key);
                 Object value = type.getValue(rawValue);
                 object.put(key, value);
             }
