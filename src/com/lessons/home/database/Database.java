@@ -1,16 +1,21 @@
 package com.lessons.home.database;
 
+import com.lessons.home.database.types.interfaces.Type;
+import com.lessons.home.database.types.Tables;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
+import java.util.stream.Collectors;
+
+import static com.lessons.home.database.Utils.getString;
 
 public class Database {
 
     private static final List<Map<String, Object>> storeCash = new ArrayList<Map<String, Object>>();
-    private static final Types TYPES = new Types();
+    private static final Tables TYPES = new Tables();
 
     public static void main(String[] args) {
         String INSERT = "INSERT VALUES ‘lastName’ = ‘Федоров’ , ‘id’=3, ‘age’=40, ‘active’=true";
@@ -40,22 +45,31 @@ public class Database {
     }
 
     private static List<Map<String, Object>> executeInsert(String command) {
-        String[] insertValues = command
-                .replace("INSERT VALUES", "")
-                .trim()
-                .replaceAll(" ", "")
-                .split(",");
+        List<String> insertValues = Arrays
+                .stream(command.replace("INSERT VALUES", "")
+                        .trim()
+                        .split(","))
+                .map(String::trim)
+                .collect(Collectors.toList());
 
         Map<String, Object> object = new HashMap<>();
 
-        for (String insertValue : insertValues) {
-            String[] keyValue = insertValue.split("=");
+        for (String insertFields : insertValues) {
+            List<String> keyValueArray = Arrays
+                    .stream(insertFields.split("="))
+                    .map(String::trim)
+                    .collect(Collectors.toList());
 
-            String key = keyValue[0].replaceAll("['|’]", "");
-            Type type = TYPES.USER.get(key);
-            Object value = type.getValue(keyValue[1]);
+            String rawKey = keyValueArray.get(0);
+            String rawValue = keyValueArray.get(1);
 
-            object.put(key, value);
+            String key = getString(rawKey);
+
+            if (TYPES.USER.containsKey(key)) {
+                Type type = TYPES.USER.get(key);
+                Object value = type.getValue(rawValue);
+                object.put(key, value);
+            }
         }
 
         storeCash.add(object);
@@ -83,33 +97,5 @@ public class Database {
         Arrays.stream(updateFields).forEach(System.out::println);
 
         return List.of(null);
-    }
-
-    private static Object getInsertValue(String rawValue) {
-        if (Objects.isNull(rawValue) || rawValue.indexOf("null") > 0) {
-            return null;
-        }
-
-        if (rawValue.indexOf("'") >= 0 && rawValue.lastIndexOf("'") > 0) {
-            return rawValue.replaceAll("'", "");
-        }
-
-        if (rawValue.startsWith("true") || rawValue.startsWith("false")) {
-            return Boolean.valueOf(rawValue);
-        }
-
-        try {
-            return Integer.parseInt(rawValue);
-        } catch (Exception ex) {
-            System.out.println("String is not Integer");
-        }
-
-        try {
-            return Double.parseDouble(rawValue);
-        } catch (Exception ex) {
-            System.out.println("String is not Double");
-        }
-
-        return null;
     }
 }

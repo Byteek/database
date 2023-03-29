@@ -1,6 +1,8 @@
-package com.lessons.home.database;
+package com.lessons.home.database.types;
 
-class Bool implements Type<Boolean> {
+import com.lessons.home.database.types.interfaces.Type;
+
+public class Bool implements Type<Boolean> {
     public Bool() {
     }
 

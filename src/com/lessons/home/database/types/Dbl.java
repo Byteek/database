@@ -1,6 +1,8 @@
-package com.lessons.home.database;
+package com.lessons.home.database.types;
 
-class Dbl implements Type<Double> {
+import com.lessons.home.database.types.interfaces.Type;
+
+public class Dbl implements Type<Double> {
     public Dbl() {
     }
 

@@ -1,6 +1,8 @@
-package com.lessons.home.database;
+package com.lessons.home.database.types;
 
-class Lng implements Type<Long> {
+import com.lessons.home.database.types.interfaces.Type;
+
+public class Lng implements Type<Long> {
     public Lng() {
     }
 
