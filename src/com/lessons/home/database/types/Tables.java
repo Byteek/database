@@ -6,9 +6,9 @@ import java.util.Map;
 
 public class Tables {
     public static Map<String, Type> USER = Map.of(
-            "id", new Lng(),
-            "lastName", new Str(),
-            "cost", new Dbl(),
-            "age", new Lng(),
-            "active", new Bool());
+            "id", new LongType(),
+            "lastName", new StringType(),
+            "cost", new DoubleType(),
+            "age", new LongType(),
+            "active", new BooleanType());
 }

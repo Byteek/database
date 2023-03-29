@@ -4,8 +4,8 @@ import com.lessons.home.database.types.interfaces.Type;
 
 import static com.lessons.home.database.Utils.getString;
 
-public class Str implements Type<String> {
-    public Str() {
+public class StringType implements Type<String> {
+    public StringType() {
     }
 
     public String getValue(String rawValue) {

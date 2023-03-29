@@ -2,8 +2,8 @@ package com.lessons.home.database.types;
 
 import com.lessons.home.database.types.interfaces.Type;
 
-public class Bool implements Type<Boolean> {
-    public Bool() {
+public class BooleanType implements Type<Boolean> {
+    public BooleanType() {
     }
 
     public Boolean getValue(String rawValue) {

@@ -2,8 +2,8 @@ package com.lessons.home.database.types;
 
 import com.lessons.home.database.types.interfaces.Type;
 
-public class Lng implements Type<Long> {
-    public Lng() {
+public class LongType implements Type<Long> {
+    public LongType() {
     }
 
     public Long getValue(String rawValue) {

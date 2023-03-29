@@ -2,8 +2,8 @@ package com.lessons.home.database.types;
 
 import com.lessons.home.database.types.interfaces.Type;
 
-public class Dbl implements Type<Double> {
-    public Dbl() {
+public class DoubleType implements Type<Double> {
+    public DoubleType() {
     }
 
     public Double getValue(String rawValue) {
