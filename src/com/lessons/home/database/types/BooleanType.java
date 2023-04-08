@@ -8,8 +8,10 @@ public class BooleanType implements Type<Boolean> {
 
     public Boolean getValue(String rawValue) {
         if (rawValue.startsWith("true") || rawValue.startsWith("false")) {
-            return Boolean.valueOf(rawValue);
-        }else {
+            String trim = rawValue.trim().replaceAll(" ", "");
+
+            return Boolean.valueOf(trim);
+        } else {
             System.out.println("Value is not Boolean");
             throw new RuntimeException("Это не Boolean");
         }

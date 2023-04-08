@@ -8,7 +8,8 @@ public class LongType implements Type<Long> {
 
     public Long getValue(String rawValue) {
         try {
-            return Long.parseLong(rawValue);
+            String trim = rawValue.trim().replaceAll(" ", "");
+            return Long.parseLong(trim);
         } catch (Exception ex) {
             System.out.println("Value is not Long");
             throw new RuntimeException("Это не Long");
