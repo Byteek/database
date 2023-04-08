@@ -49,10 +49,38 @@ public enum Conditions {
                     return !a.equals(b);
                 }
                 case "like" -> {
-                    return stringA.compareTo(String.valueOf(b)) == 0;
+                    boolean b1 = stringB.startsWith("%");
+                    boolean b2 = stringB.endsWith("%");
+
+                    if(b1 && b2){
+                       return stringA.contains(stringB.replaceAll("%", ""));
+                    }
+
+                    if(b1){
+                       return stringA.startsWith(stringB.replaceAll("%", ""));
+                    }
+
+                    if(b2){
+                       return stringA.endsWith(stringB.replaceAll("%", ""));
+                    }
                 }
                 case "ilike" -> {
-                    return stringA.compareToIgnoreCase(String.valueOf(b)) == 0;
+
+                    //TODO: to Lower case
+                    boolean b1 = stringB.startsWith("%");
+                    boolean b2 = stringB.endsWith("%");
+
+                    if(b1 && b2){
+                        return stringA.contains(stringB.replaceAll("%", ""));
+                    }
+
+                    if(b1){
+                        return stringA.startsWith(stringB.replaceAll("%", ""));
+                    }
+
+                    if(b2){
+                        return stringA.endsWith(stringB.replaceAll("%", ""));
+                    }
                 }
                 case ">=" -> {
                     long longA = Long.parseLong(stringA);
